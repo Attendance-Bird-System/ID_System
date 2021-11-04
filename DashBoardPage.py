@@ -39,7 +39,11 @@ class DashBoardPage(Frame):
     def gotostsatisticspage(self):
         self.controller.show_frame("StatisticsPage")
 
+    def archivedGroup(self):
+        self.controller.show_frame("archivedGroup")
+
     def wifiConfButton(self):
+
         self.controller.show_frame("WifiConf")
 
     def gotoWhatsApppage(self):
@@ -63,7 +67,6 @@ class DashBoardPage(Frame):
         leftsideframe = Frame(dashboardframe, bg=white_color)
         botomleftframe = Frame(leftsideframe, bg=white_color)
         idcardframe = Frame(leftsideframe, bg=white_color, width=600, height=300)
-
 
         #   ---------------------------------------------------------------------
         myFont = font.Font(size=30, weight='bold')
@@ -98,8 +101,7 @@ class DashBoardPage(Frame):
 
         global img
         path = "images/pic.jpg"
-        img = ImageTk.PhotoImage(Image.open(path).resize((200, 200), Image.ANTIALIAS))
-
+        img = ImageTk.PhotoImage(Image.open(path).resize((180, 215), Image.ANTIALIAS))
 
 
         label = Label(idcardframe, image=img, bg=white_color)
@@ -120,23 +122,25 @@ class DashBoardPage(Frame):
                           relief=FLAT,
                           xscrollcommand=1,
                           selectbackground='#2E945E',
-                          cursor="target",
                           highlightbackground="#3F3F3F"
                           )
-        listbox.insert(1, " IOT Group (33)")
+        listbox.insert(1, " IOT Course (33)")
         listbox.insert(2, " Python Group (23)")
-        listbox.insert(3, " Lab Group (66)")
-        listbox.insert(4, " Lab Group2 (12)")
-        listbox.insert(5, " Lab Group3")
-        listbox.insert(6, " Lab Group4")
-        listbox.insert(7, " Lab Group5")
-        listbox.insert(8, " Lab Group6")
-        listbox.insert(9, " Lab Group7")
-        listbox.insert(10, " Lab Group8")
-        listbox.insert(11, " Lab Group9")
+        listbox.insert(3, " PCB Lab (66)")
+        listbox.insert(4, " MicroMouse (12)")
+        listbox.insert(5, " Marketing (11)")
+        listbox.insert(6, " Lab (22)")
+        listbox.insert(7, " Visitors (34)")
+        listbox.insert(8, " Workers (8)")
+        listbox.insert(9, " Other (80)")
+        listbox.insert(10, " Fabrication (72)")
+        listbox.insert(11, " Lab Group (3)")
 
-        addgroupbutton = Button(rightsideframe, text="ADD Group +", relief=FLAT, font=myFont, bg=green_color, fg="#3F3F3F",
+        addgroupbutton = Button(rightsideframe, text="Create Group +", relief=FLAT, font=State_Font, bg=green_color, fg="#3F3F3F",
                          command=lambda: self.addGroup(), activebackground="#3F3F3F", activeforeground=green_color)
+
+        archived_Groups_button = Button(rightsideframe, text="Archived", relief=FLAT, font=State_Font, bg=green_color, fg="#3F3F3F",
+                         command=lambda: self.archivedGroup(), activebackground="#3F3F3F", activeforeground=green_color)
 
         global logouticon
         path = "images/logout.png"
@@ -148,7 +152,10 @@ class DashBoardPage(Frame):
         logoutbutton.pack(side=LEFT)
         Lt.pack(anchor=CENTER, fill=Y, expand=1)
         listbox.pack(fill=Y, expand=1)
+
+        archived_Groups_button.pack(side=BOTTOM, fill=X)
         addgroupbutton.pack(side=BOTTOM, fill=X)
+
         listbox.bind('<<ListboxSelect>>', self.onselect)
         rightsideframe.pack(side=RIGHT, fill=Y)
 

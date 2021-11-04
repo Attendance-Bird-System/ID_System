@@ -9,20 +9,21 @@ from tkinter import messagebox
 white_color = "#FFFFFF"
 background_color = "#4F4171"
 green_color = "#09C54E"
-com_color = "#CCFFCC"
-is_on = True
+com_color ="#CCFFCC"
 
 
-class GroupPage(Frame):
+class archivedGroup(Frame):
 
-    def switch(self):
-        global is_on
-        if is_on:
-            self.on_button.config(image=off)
-            is_on = False
-        else:
-            self.on_button.config(image=on)
-            is_on = True
+
+    def onselectGroup(self, evt):
+        w = evt.widget
+        b = w.curselection()
+        if len(b) > 0:
+            index = int(w.curselection()[0])
+            value = w.get(index)
+            print('You selected item %d: "%s"' % (index, value))
+            #self.controller.SetGroupName(value)
+            #self.controller.show_frame("GroupPage")
 
     def back(self):
         self.controller.show_frame("DashBoardPage")
@@ -33,20 +34,6 @@ class GroupPage(Frame):
 
     def CreateCSV(self):
         if messagebox.askokcancel("CSV file", "Do you want to Create CSV file?"):
-            pass
-
-    def ArcihveGroup(self):
-        if messagebox.askokcancel("Archive Group", "Do you want to Archive this Group?"):
-            pass
-
-    def addPerson(self):
-        self.controller.show_frame("AddPersonPage")
-
-    def editPerson(self):
-        self.controller.show_frame("editPerson")
-
-    def removePerson(self):
-        if messagebox.askokcancel("Remove Person", "Do you want to Remove this Person?"):
             pass
 
     def ChangePersonData(self, name):
@@ -81,7 +68,37 @@ class GroupPage(Frame):
         #persondataframe = Frame(self, bg="#5A5C6A")
         tabledataframe = Frame(self, bg="#5A5C6A", relief=FLAT)
         rightPropframe = Frame(self, bg="#3F3F3F", relief=FLAT)
+        rightGroupsframe = Frame(self, bg="#3F3F3F", relief=FLAT)
 
+        #   --------------------------------------------------------------------
+        LG = Label(rightGroupsframe, text="Groups", font=myFont, bg=green_color, fg="#3F3F3F")
+        LG.pack(fill=X, ipady=10)
+
+        listboxGroups = Listbox(rightGroupsframe,
+                          width=17,
+                          bg="#3F3F3F",
+                          activestyle='dotbox',
+                          font=myFont,
+                          fg=com_color,
+                          relief=FLAT,
+                          xscrollcommand=1,
+                          selectbackground='#2E945E',
+                          highlightbackground=green_color,
+                                borderwidth=8, highlightcolor=green_color, highlightthickness=7)
+
+        listboxGroups.insert(1, " IOT Course (33)")
+        listboxGroups.insert(2, " Python Group (23)")
+        listboxGroups.insert(3, " PCB Lab (66)")
+        listboxGroups.insert(4, " MicroMouse (12)")
+        listboxGroups.insert(5, " Marketing (11)")
+        listboxGroups.insert(6, " Lab (22)")
+        listboxGroups.insert(7, " Visitors (34)")
+        listboxGroups.insert(8, " Workers (8)")
+        listboxGroups.insert(9, " Other (80)")
+        listboxGroups.insert(10, " Fabrication (72)")
+        listboxGroups.insert(11, " Lab Group (3)")
+        listboxGroups.pack(fill=Y, expand=1)
+        listboxGroups.bind('<<ListboxSelect>>', self.onselectGroup)
         #   --------------------------------------------------------------------
         lblDateandState = Label(tabledataframe, text="Date and State",
                                            font=normalfont, bg="#3F3F3F", fg=green_color)
@@ -140,7 +157,7 @@ class GroupPage(Frame):
                             command=lambda: self.back(), image=backphoto, activebackground="#3F3F3F")
         buttonback.pack(side=LEFT, fill=Y)
         #   --------------------------------------------------------------------
-        self.LG = Label(upsideframe, text="Group Name", font=myFont, bg=green_color, fg="#3F3F3F")
+        self.LG = Label(upsideframe, text="Archived Groups", font=myFont, bg=green_color, fg="#3F3F3F")
         self.LG.pack(side=LEFT, fill=BOTH, expand=1)
         #   --------------------------------------------------------------------
         global csv_icon
@@ -150,30 +167,13 @@ class GroupPage(Frame):
                          image=csv_icon,
                          command=lambda: self.CreateCSV(), activebackground=green_color, )
         #   --------------------------------------------------------------------
-        global archived_icon
-        path = "images/archived.png"
-        archived_icon = ImageTk.PhotoImage(Image.open(path).resize((80, 80), Image.ANTIALIAS))
-        archived_but = Button(upsideframe, relief=FLAT, bg=green_color,
-                              image=archived_icon,
-                              command=lambda: self.ArcihveGroup(), activebackground=green_color, )
-        #   --------------------------------------------------------------------
+
         global remove_icon
         path = "images/remove.png"
         remove_icon = ImageTk.PhotoImage(Image.open(path).resize((80, 80), Image.ANTIALIAS))
         remove_but = Button(upsideframe, relief=FLAT, bg=green_color,
                             image=remove_icon,
                             command=lambda: self.RemoveGroup(), activebackground=green_color, )
-
-
-        global on
-        on = PhotoImage(file="images/on.png")
-        global off
-        off = PhotoImage(file="images/off.png")
-        self.on_button = Button(upsideframe, image=on, command=lambda: self.switch(), bg=green_color, relief=FLAT,
-                                activebackground=green_color,)
-
-        self.on_button.pack(side=LEFT, fill=Y)
-        archived_but.pack(side=LEFT,)
         csv_but.pack(side=LEFT,)
         remove_but.pack(side=LEFT)
 
@@ -229,37 +229,16 @@ class GroupPage(Frame):
                            fg="#2EF577")
         emailValue.pack(anchor="w", ipadx=10)
 
-        buttonFrame = Frame(persondataframe, bg='#5A5C6A')
-        removepersonbutton = Button(buttonFrame, text="Remove", font=boldedfont, relief=FLAT, bg=green_color,
-                                 fg="#3F3F3F", command=lambda: self.removePerson(), activebackground="#3F3F3F",
-                                 activeforeground=green_color)
-        removepersonbutton.pack(side=LEFT, padx=10)
-        edit_personbutton = Button(buttonFrame, text="Edit", font=boldedfont, relief=FLAT, bg=green_color,
-                                 fg="#3F3F3F", command=lambda: self.editPerson(), activebackground="#3F3F3F",
-                                 activeforeground=green_color)
-        edit_personbutton.pack(side=LEFT, padx=10)
-        #   --------------------------------------------------------------------
-        addpersonbutton = Button(Leftsideframe, text="add Person + ", font=boldedfont, relief=FLAT, bg=green_color,
-                            fg="#3F3F3F", command=lambda: self.addPerson(), activebackground="#3F3F3F",
-                            activeforeground=green_color)
-        buttonFrame.pack(side=BOTTOM, pady=20)
         #   --------------------------------------------------------------------- pack() frames
 
         upsideframe.pack(side=TOP, fill=X,)
         LblNames.pack(side=TOP, fill=X)
         listbox.pack(fill=Y, expand=1)
-        addpersonbutton.pack(side=BOTTOM, fill=X)
+        rightGroupsframe.pack(side=LEFT, fill=Y)
         Leftsideframe.pack(side=LEFT, fill=Y)
         persondataframe.pack(side=LEFT, fill=Y,)
         tabledataframe.pack(side=LEFT, fill=Y)
         rightPropframe.pack(side=RIGHT,)
-
-        #   ---------------------------------------------------------------------
-
-
-
-
-
 
 
 
