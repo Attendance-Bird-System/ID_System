@@ -13,6 +13,7 @@ from addGroupPage import *
 from edit_peson_page import *
 from archivedGroup import *
 
+
 class Main(Tk):
 
     def __init__(self, *args, **kwargs):
