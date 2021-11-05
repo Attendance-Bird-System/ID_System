@@ -4,6 +4,7 @@ import tkinter.font as font
 from PIL import Image, ImageTk
 
 
+
 class VerticalScrolledFrame:
 
     def __init__(self, master, **kwargs):

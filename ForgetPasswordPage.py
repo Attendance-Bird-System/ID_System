@@ -8,6 +8,7 @@ from tkinter import messagebox
 background_color = "white"
 mov_color = "#bb7beb"
 
+
 class ForgetPasswordPage(Frame):
 
     def back(self):

@@ -9,6 +9,7 @@ background_color = "#4F4171"
 green_color = "#09C54E"
 com_color = "#CCFFCC"
 
+
 class editPerson(Frame):
 
     def onselect(self, evt):

@@ -7,6 +7,7 @@ from tkinter import messagebox
 background_color = "white"
 
 
+
 class CreateNewUserPage(Frame):
 
     def back(self):

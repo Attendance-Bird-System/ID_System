@@ -14,6 +14,7 @@ green_color = "#09C54E"
 com_color ="#CCFFCC"
 
 
+
 class StatisticsPage(Frame):
 
     def back(self):

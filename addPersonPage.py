@@ -170,3 +170,4 @@ class AddPersonPage(Frame):
         rightPropframe.pack(side=RIGHT, fill=Y, expand=1, padx=10)
 
 
+

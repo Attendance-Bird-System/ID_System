@@ -13,6 +13,7 @@ com_color = "#CCFFCC"
 is_on = True
 
 
+
 class GroupPage(Frame):
 
     def switch(self):

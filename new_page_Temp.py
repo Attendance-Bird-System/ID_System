@@ -10,6 +10,7 @@ green_color = "#09C54E"
 com_color ="#CCFFCC"
 
 
+
 class newpage(Frame):
 
     def back(self):

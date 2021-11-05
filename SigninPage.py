@@ -10,6 +10,7 @@ green_color = "#b4de22"
 mov_color = "#bb7beb"
 
 
+
 class SignInPage(Frame):
     def callback(self, url):
         webbrowser.open_new_tab(url)
