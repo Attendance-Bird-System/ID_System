@@ -13,7 +13,8 @@ from addGroupPage import *
 from edit_peson_page import *
 from archivedGroup import *
 
-# test test 
+# main file 
+# need no changes
 
 
 class Main(Tk):
