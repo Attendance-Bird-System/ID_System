@@ -1,4 +1,4 @@
-# Fire base auth LOGIN 
+# Fire base auth LOGIN using gmail
 
 from tkinter import *
 from tkinter import ttk
