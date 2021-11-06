@@ -14,7 +14,7 @@ from addPersonPage import *
 from addGroupPage import *
 from edit_peson_page import *
 from archivedGroup import *
-
+from firebase import fireBaseControll
 
 class Main(Tk):
 
@@ -98,7 +98,6 @@ class Main(Tk):
 
     def CloseLoadingScreen(self):
         self.geometry('1200x700+150+50')
-
 
 app = Main()
 app.title("Bird System")

@@ -1,4 +1,4 @@
-# send data to google sheet
+# send data to google sheet & firebase
 
 
 from tkinter import *

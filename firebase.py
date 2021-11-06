@@ -33,6 +33,14 @@ class fireBaseControll :
             user = self.auth.create_user_with_email_and_password(userMail,userPass)
             self.uId = user['localId']
             self.auth.send_email_verification(user['idToken']) # email sent ~~ 
+
+            # Write Initial Data to Firebase 
+            self.db.child(self.uId).update(
+                            {
+                "data" : "NULL,NULL",
+                "lastID" : "NULL,notFound",
+                "nGroups" : 0,
+            }, )
             
         except requests.HTTPError as e:
             error_json = e.args[1]
@@ -65,3 +73,9 @@ class fireBaseControll :
             error_json = e.args[1]
             error = json.loads(error_json)['error']['message']
             messagebox.showinfo("SignUP Error", str(error))
+
+
+
+'''ff = fireBaseControll()
+
+ff.SignUP("moneam.elbahy@gmail.com" , "1192000")'''

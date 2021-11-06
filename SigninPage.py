@@ -58,6 +58,7 @@ class SignInPage(Frame):
         print("Start To LogIn with ")
         print( "user name {} , Pass {} ".format(userName , Password))
 
+        ## creat user from firebase control object 
 
         # navigate to the dashboard 
         '''self.controller.changesize()
