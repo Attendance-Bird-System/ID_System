@@ -7,7 +7,6 @@ import tkinter.font as font
 from tkinter import messagebox
 import webbrowser
 
-
 background_color = "#FFFFFF"
 green_color = "#b4de22"
 mov_color = "#bb7beb"

@@ -108,9 +108,3 @@ class addGroupPage(Frame):
         Centerframe.pack(side=TOP, fill=BOTH, expand=1)
         self.groupdataframe.pack(side=TOP, fill=Y, expand=1)
         addPROPbutton.pack(side=TOP)
-
-
-
-
-
-
