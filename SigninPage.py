@@ -7,12 +7,14 @@ import tkinter.font as font
 from tkinter import messagebox
 import webbrowser
 
+
 background_color = "#FFFFFF"
 green_color = "#b4de22"
 mov_color = "#bb7beb"
 
 
 class SignInPage(Frame):
+
     def callback(self, url):
         webbrowser.open_new_tab(url)
 
@@ -51,22 +53,27 @@ class SignInPage(Frame):
     def close_top(self):
         self.buttondev['state'] = "normal"
         self.window.destroy()
+    
+    def userSignIn(self , userName , Password) :
+        print("Start To LogIn with ")
+        print( "user name {} , Pass {} ".format(userName , Password))
 
-    def signin(self):
-        if self.pass_text.get() == "2000":
-            self.controller.changesize()
-            self.controller.show_frame("DashBoardPage")
+
+        # navigate to the dashboard 
+        '''self.controller.changesize()
+            self.controller.show_frame("DashBoardPage")'''
+
+    def normalSignIn(self):
+        if (self.pass_text.get() != "") & (self.user_text.get() != "") :
+            self.userSignIn(self.user_text.get() , self.pass_text.get())
         else:
-            messagebox.showinfo("WrongPassword", "that is a wrong password\n the correct is 2000")
+            messagebox.showinfo("Missing Input", "Gmail and Password can't be empty")
 
     def signinByEnter(self, event):
-        if self.pass_text.get() != "":
-            if self.pass_text.get() == "2000":
-                self.controller.changesize()
-                self.controller.show_frame("DashBoardPage")
-            else:
-                messagebox.showinfo("WrongPassword", "that is a wrong password\n the correct is 2000")
-            self.E2.delete(0, 'end')
+        if (self.pass_text.get() != "") & (self.user_text.get() != "") :
+            self.userSignIn(self.user_text.get() , self.pass_text.get())
+        else:
+            messagebox.showinfo("Missing Input", "Gmail and Password can't be empty")
 
     def forget_pass(self):
        self.controller.show_frame("ForgetPasswordPage")
@@ -117,7 +124,7 @@ class SignInPage(Frame):
 
         #   ---------------------------------------------------------------------
         button1 = Button(self, text="Sign In",  relief=FLAT, font=myFont, bg=green_color, fg="#7A1481",
-                            command=lambda: self.signin(), activebackground="#7A1481", activeforeground="#A9F261")
+                            command=lambda: self.normalSignIn(), activebackground="#7A1481", activeforeground="#A9F261")
         button1.place(x=430, y=500, width=300)
         #   ---------------------------------------------------------------------
         L3 = Label(self, text="Beta Version", font=regFont, bg="#3F3F3F", fg="white")
