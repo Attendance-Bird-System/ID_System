@@ -1,3 +1,5 @@
+# The main Fle That will be Run and call the screens 
+
 from tkinter import *
 from tkinter import ttk
 from SigninPage import *
@@ -12,9 +14,6 @@ from addPersonPage import *
 from addGroupPage import *
 from edit_peson_page import *
 from archivedGroup import *
-
-# main file 
-# need no changes
 
 
 class Main(Tk):
