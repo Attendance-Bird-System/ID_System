@@ -1,4 +1,4 @@
-# Fire base auth LOGIN using gmail
+# Finished File
 
 from tkinter import *
 from tkinter import ttk
@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 import tkinter.font as font
 from tkinter import messagebox
 import webbrowser
-
+from firebase import fireBase 
 
 background_color = "#FFFFFF"
 green_color = "#b4de22"
@@ -55,14 +55,8 @@ class SignInPage(Frame):
         self.window.destroy()
     
     def userSignIn(self , userName , Password) :
-        print("Start To LogIn with ")
-        print( "user name {} , Pass {} ".format(userName , Password))
+        fireBase.SignIn(userName , Password , self.rememberbox.get() , self.controller)
 
-        ## creat user from firebase control object 
-
-        # navigate to the dashboard 
-        '''self.controller.changesize()
-            self.controller.show_frame("DashBoardPage")'''
 
     def normalSignIn(self):
         if (self.pass_text.get() != "") & (self.user_text.get() != "") :

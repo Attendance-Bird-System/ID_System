@@ -1,10 +1,12 @@
-# fire base auth
+# Finished File
+
 
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 import tkinter.font as font
 from tkinter import messagebox
+from firebase import fireBase
 
 
 background_color = "white"
@@ -17,6 +19,7 @@ class ForgetPasswordPage(Frame):
 
     def sendEmail(self):
         messagebox.showinfo(f"Reset Password Email", f"Sent to {self.email_text.get()}")
+        fireBase.forgetPass(self.email_text.get() , self.controller)
 
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)

@@ -1,4 +1,5 @@
-# send data to google sheet
+# Finished File
+
 
 
 from tkinter import *
@@ -6,6 +7,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import tkinter.font as font
 from tkinter import messagebox
+from firebase import fireBase 
 
 background_color = "white"
 
@@ -16,7 +18,12 @@ class CreateNewUserPage(Frame):
         self.controller.show_frame("SignInPage")
 
     def CreateNewUserButton(self):
-        messagebox.showinfo(f"New User", "New User Account Created Successfully")
+
+        if self.password_text.get() == self.confirmpassword_text.get() :
+            fireBase.SignUP(self.email_text.get(),self.password_text.get(),self.controller)
+        else :
+            messagebox.showinfo("Error", "Password must match")
+
 
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
@@ -46,9 +53,13 @@ class CreateNewUserPage(Frame):
         #   ---------------------------------------------------------------------
         L0 = Label(self, text="User Information", font=bigFont, bg=background_color, fg="#7A1481")
         L0.place(x=600, y=30)
+    
         #   ---------------------------------------------------------------------
         L1 = Label(self, text="Full Name", font=myFont, bg=background_color, fg="#7A1481")
         L1.place(x=600, y=100)
+
+        Lo = Label(self, text="Optional", font= font.Font(size=10), bg=background_color, fg="#7A1481")
+        Lo.place(x=750, y=110)
         E1 = Entry(self, relief=FLAT, font=myFont, fg="#7A1481", textvariable=self.FullName_text,
         highlightbackground = "#b4de22", highlightthickness = 1)
         E1.place(x=600, y=140, width=500)

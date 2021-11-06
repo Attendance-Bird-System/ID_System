@@ -1,7 +1,11 @@
-# The main Fle That will be Run and call the screens 
+# The main File That will be Run and call the screens 
+# Finished File
+
 
 from tkinter import *
 from tkinter import ttk
+
+from pyasn1.type.univ import Null
 from SigninPage import *
 from DashBoardPage import *
 from StatisticsPage import *
@@ -14,11 +18,11 @@ from addPersonPage import *
 from addGroupPage import *
 from edit_peson_page import *
 from archivedGroup import *
-from firebase import fireBaseControll
+from firebase import fireBase
 
 class Main(Tk):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, userBefor , *args, **kwargs):
         Tk.__init__(self, *args, **kwargs)
 
         container = Frame(self)
@@ -38,8 +42,8 @@ class Main(Tk):
             self.frames[page_name] = frame
 
             frame.grid(row=0, column=0, sticky="nsew")
-
-        self.show_frame("SignInPage")
+    
+        self.show_frame('DashBoardPage' if userBefor else 'SignInPage')
 
     def show_frame(self, page_name):
         frame = self.frames[page_name]
@@ -99,10 +103,26 @@ class Main(Tk):
     def CloseLoadingScreen(self):
         self.geometry('1200x700+150+50')
 
-app = Main()
+
+
+userBefor = False 
+
+# check if there any user Data befor 
+try :
+    with open("userData.txt" , 'r') as file :
+         data = file.read()
+         uId = data.split(',')[1]
+         userBefor = data.split(',')[0] == "remeber"
+         if userBefor :
+             fireBase.setuId(uId)
+except :
+    pass 
+
+
+
+app = Main(userBefor)
 app.title("Bird System")
-app.geometry('1200x700+150+50')
+app.geometry('1200x700+150+50')    
 #app.resizable(0, 0)
 app.iconbitmap('images/birdlogo.ico')
 app.mainloop()
-

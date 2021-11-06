@@ -1,3 +1,4 @@
+from pyasn1.type.univ import Null
 from pyrebase import pyrebase 
 import requests
 import json
@@ -16,9 +17,7 @@ class fireBaseControll :
     "measurementId" : "G-Y72B1GRY6T"
     }
 
-    def __init__(self):
-        print("initialize fire base ")
-        
+    def __init__(self ):        
         # initialize the fire base using credintials
         firebase = pyrebase.initialize_app(self.firebaseConfig)
         
@@ -28,54 +27,60 @@ class fireBaseControll :
         # Get a reference to the database service
         self.db = firebase.database()
     
-    def SignUP(self, userMail , userPass) :
+    def setuId(self , uId) :
+        self.uId = uId 
+
+    def SignUP(self, userMail , userPass , controller) :
         try : 
             user = self.auth.create_user_with_email_and_password(userMail,userPass)
-            self.uId = user['localId']
             self.auth.send_email_verification(user['idToken']) # email sent ~~ 
-
-            # Write Initial Data to Firebase 
-            self.db.child(self.uId).update(
+            self.db.child( user['localId']).update(
                             {
                 "data" : "NULL,NULL",
                 "lastID" : "NULL,notFound",
                 "nGroups" : 0,
             }, )
             
+            messagebox.showinfo(f"email verificationl", "verification email sent to "+userMail)        
         except requests.HTTPError as e:
             error_json = e.args[1]
             error = json.loads(error_json)['error']['message']
             messagebox.showinfo("SignUP Error", str(error))
         else :
             # Sign Up Sucessfully 
-            print(self.uId)
+             # Write Initial Data to Firebase 
+            controller.show_frame("SignInPage")
 
-    def SignIn(self, userMail , userPass) :
+
+    def SignIn(self, userMail , userPass , rememberbox , controller) :
         try : 
             user = self.auth.sign_in_with_email_and_password(userMail,userPass)
             self.uId = user['localId']
             userVerified = self.auth.get_account_info(user['idToken'])['users'][0]['emailVerified'] 
             if userVerified : 
                 # Sign in Sucessfully 
-                 print(self.uId)                
+                if rememberbox :
+                     with open("userData.txt" , 'w') as file :
+                         file.write("remeber," + self.uId)
+                       # navigate to the dashboard 
+                controller.changesize()
+                controller.show_frame("DashBoardPage")
             else :
-                messagebox.showinfo("SignIN Error", "Please Verifiy your mail")
-                # self.auth.send_email_verification(user['idToken'])
+                messagebox.showinfo("SignIN Error", "Please Verifiy your mail \n ather email will be sent now")
+                self.auth.send_email_verification(user['idToken'])
         except requests.HTTPError as e:
             error_json = e.args[1]
             error = json.loads(error_json)['error']['message']
             messagebox.showinfo("SignUP Error", str(error))
     
-    def forgetPass(self , emailAddress) :
+    def forgetPass(self , emailAddress , controller ) :
         try :
-            self.auth.send_password_reset_email(emailAddress)        
+            self.auth.send_password_reset_email(emailAddress)   
+            controller.show_frame("SignInPage")
         except requests.HTTPError as e:
             error_json = e.args[1]
             error = json.loads(error_json)['error']['message']
             messagebox.showinfo("SignUP Error", str(error))
 
 
-
-'''ff = fireBaseControll()
-
-ff.SignUP("moneam.elbahy@gmail.com" , "1192000")'''
+fireBase = fireBaseControll()

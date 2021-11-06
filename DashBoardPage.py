@@ -36,6 +36,8 @@ class DashBoardPage(Frame):
 
     def logout(self):
         self.controller.show_frame("SignInPage")
+        with open("userData.txt" , 'w') as file :
+            file.write("")
         self.controller.MinimizeScreen()
 
     def gotostsatisticspage(self):
