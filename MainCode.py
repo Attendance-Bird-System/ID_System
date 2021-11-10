@@ -19,6 +19,7 @@ from addGroupPage import *
 from edit_peson_page import *
 from archivedGroup import *
 from firebase import fireBase
+from Loading_Page import *
 
 
 
@@ -39,7 +40,7 @@ class Main(Tk):
         self.frames = {}
         for F in (DashBoardPage, SignInPage, StatisticsPage, ForgetPasswordPage, CreateNewUserPage,
                   Send_Whatsapp_page, GroupPage, WifiConf, AddPersonPage, addGroupPage, editPerson,
-                  archivedGroup):
+                  archivedGroup, Loading_page):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
