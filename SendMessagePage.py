@@ -7,6 +7,11 @@ import tkinter.font as font
 from PIL import Image, ImageTk
 from scrollframe import *
 from tkinter import messagebox
+import pywhatkit as kit
+import time
+import pyautogui as pg
+
+
 
 white_color = "#FFFFFF"
 background_color = "#4F4171"
@@ -22,7 +27,6 @@ class Send_Whatsapp_page(Frame):
         if len(b) > 0:
             index = int(w.curselection()[0])
             value = w.get(index)
-            print('You selected item %d: "%s"' % (index, value))
             values = [self.listbox.get(idx) for idx in self.listbox.curselection()]
             all = ', '.join(values)
             self.L6["text"] = all
@@ -67,9 +71,11 @@ class Send_Whatsapp_page(Frame):
 
 
     def SendMessage(self):
+        print(self.Message.get())
+
         messagebox.showinfo("Whatsapp Sender", "Don't Touch PC While Sending Messages\r "
-                                               "This Process Will Take 10 Minutes\r"
-                                               "Make Sure you whatsapp web opened")
+                                               "This Process Will Take some Time\r"
+                                               "Make Sure you whatsapp web is active")
 
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
@@ -199,5 +205,10 @@ class Send_Whatsapp_page(Frame):
 
 
 
+# kit.sendwhatmsg_instantly(phone_no="+201229473873", message= "welcome2 from python" , wait_time=20 )
 
 
+# # import winsound
+# # frequency = 2500  # Set Frequency To 2500 Hertz
+# # duration = 1000  # Set Duration To 1000 ms == 1 second
+# # winsound.Beep(frequency, duration)

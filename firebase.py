@@ -60,7 +60,7 @@ class fireBaseControll :
             if userVerified : 
                 # Sign in Sucessfully 
                 if rememberbox :
-                     with open("userData.txt" , 'w') as file :
+                     with open("userData.birdInf" , 'w') as file :
                          file.write("remeber," + self.uId)
                        # navigate to the dashboard 
                 controller.changesize()

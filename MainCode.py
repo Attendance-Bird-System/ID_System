@@ -20,7 +20,10 @@ from edit_peson_page import *
 from archivedGroup import *
 from firebase import fireBase
 
+
+
 class Main(Tk):
+
 
     def __init__(self, userBefor , *args, **kwargs):
         Tk.__init__(self, *args, **kwargs)
@@ -109,7 +112,7 @@ userBefor = False
 
 # check if there any user Data befor 
 try :
-    with open("userData.txt" , 'r') as file :
+    with open("userData.birdInf" , 'r') as file :
          data = file.read()
          uId = data.split(',')[1]
          userBefor = data.split(',')[0] == "remeber"
